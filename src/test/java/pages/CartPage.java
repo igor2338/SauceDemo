@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 public class CartPage extends BasePage {
     public final By TITLE = By.xpath("//span[text()='Your Cart']");
     public final By COUNT = By.cssSelector(".shopping_cart_badge");
-    public final By PRODUCTS = By.xpath("//button[contains(@class,'btn btn_primary btn_small btn_inventory')]");
     public final By REMOVE = By.xpath("//button[contains(@class,'btn btn_secondary btn_small cart_button')]");
     public final By BUTTON = By.id("continue-shopping");
     public final By BUTTON_CHECKOUT = By.id("checkout");
@@ -26,10 +25,6 @@ public class CartPage extends BasePage {
 
     public int isElement() {
         return driver.findElements(COUNT).size();
-    }
-
-    public void addProduct() {
-        driver.findElement(PRODUCTS).click();
     }
 
     public void removeProduct() {

@@ -23,8 +23,8 @@ public class CartTest extends BaseTest {
         loginPage.login("standard_user", "secret_sauce");
         productsPage.open();
         assertTrue(productsPage.isPageOpened());
-        cartPage.addProduct();
-        cartPage.addProduct();
+        productsPage.addProduct();
+        productsPage.addProduct();
         cartPage.open();
         assertTrue(cartPage.isPageOpened());
         assertEquals(cartPage.isElement(),
@@ -38,8 +38,8 @@ public class CartTest extends BaseTest {
         loginPage.login("standard_user", "secret_sauce");
         productsPage.open();
         assertTrue(productsPage.isPageOpened());
-        cartPage.addProduct();
-        cartPage.addProduct();
+        productsPage.addProduct();
+        productsPage.addProduct();
         cartPage.open();
         assertTrue(cartPage.isPageOpened());
         cartPage.removeProduct();
