@@ -1,14 +1,25 @@
 package tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
 public class CheckoutTest extends BaseTest {
-    @Test
-    public void checkButtonCart() {
+
+    @DataProvider(name = "LoginDataForCheckout")
+    public Object[][] loginDataForCheckout() {
+        return new Object[][]{
+                {"standard_user", "secret_sauce"}
+        };
+    }
+
+    @Test(priority = 1, dataProvider = "LoginDataForCheckout", description = "Проверка кнопки корзина",
+            testName = "Позитивный. Проверка кнопки корзина",
+            groups = {"Checkout"})
+    public void checkButtonCart(String user, String password) {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         productsPage.open();
         assertTrue(productsPage.isPageOpened());
         productsPage.addProduct();
@@ -21,10 +32,12 @@ public class CheckoutTest extends BaseTest {
         assertTrue(cartPage.isPageOpened());
     }
 
-    @Test
-    public void checkButtonCancel() {
+    @Test(priority = 2, dataProvider = "LoginDataForCheckout", description = "Проверка кнопки Cancel",
+            testName = "Позитивный. Проверка кнопки Cancel",
+            groups = {"Checkout"})
+    public void checkButtonCancel(String user, String password) {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         productsPage.open();
         assertTrue(productsPage.isPageOpened());
         productsPage.addProduct();
@@ -37,10 +50,12 @@ public class CheckoutTest extends BaseTest {
         assertTrue(cartPage.isPageOpened());
     }
 
-    @Test
-    public void checkFormNegative() {
+    @Test(priority = 3, dataProvider = "LoginDataForCheckout", description = "Проверка формы покупки",
+            testName = "Негативный. Проверка формы покупки",
+            groups = {"Checkout"})
+    public void checkFormNegative(String user, String password) {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         productsPage.open();
         assertTrue(productsPage.isPageOpened());
         productsPage.addProduct();
@@ -94,10 +109,12 @@ public class CheckoutTest extends BaseTest {
                 "Ошибка не соответствует");
     }
 
-    @Test
-    public void checkFormPositive() {
+    @Test(priority = 4, dataProvider = "LoginDataForCheckout", description = "Позитивный. Проверка формы покупки",
+            testName = "Позитивный. Проверка формы покупки",
+            groups = {"Checkout"})
+    public void checkFormPositive(String user, String password) {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         productsPage.open();
         assertTrue(productsPage.isPageOpened());
         productsPage.addProduct();
@@ -113,10 +130,12 @@ public class CheckoutTest extends BaseTest {
         assertTrue(checkOutStepTwoPage.isPageOpened());
     }
 
-    @Test
-    public void checkFormStepTwoNegative() {
+    @Test(priority = 5, dataProvider = "LoginDataForCheckout", description = "Проверка формы покупки шаг 2",
+            testName = "Негативный. Проверка формы покупки шаг 2",
+            groups = {"Checkout"})
+    public void checkFormStepTwoNegative(String user, String password) {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         productsPage.open();
         assertTrue(productsPage.isPageOpened());
         productsPage.addProduct();
