@@ -1,7 +1,9 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CheckOutStepOnePage extends BasePage {
 
@@ -18,14 +20,31 @@ public class CheckOutStepOnePage extends BasePage {
         super(driver);
     }
 
-    public void openCheckOutStepOne() {
+    @Step("Открытие страницы Корзина")
+    @Override
+    public CheckOutStepOnePage open() {
         driver.get(BASE_URL + "checkout-step-one.html");
+        return this;
     }
 
-    public boolean isPageOpened() {
-        return driver.findElement(TITLE).isDisplayed();
+    @Step("Отображение элемента на странице Корзина")
+    @Override
+    public CheckOutStepOnePage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE));
+        return this;
     }
 
+    @Override
+    public BasePage isElement() {
+        return null;
+    }
+
+    @Override
+    public BasePage removeProduct() {
+        return null;
+    }
+
+    @Step("Отображение элемента на странице Корзина")
     public void clickButtonCart() {
         driver.findElement(BUTTON_CART).click();
     }
@@ -33,18 +52,23 @@ public class CheckOutStepOnePage extends BasePage {
     public void clickButtonCancel() {
         driver.findElement(BUTTON_CANCEL).click();
     }
+
     public void clickButtonContinue() {
         driver.findElement(BUTTON_CONTINUE).click();
     }
+
     public String getErrorMessage() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
+
     public void inputFirst(String FirstName) {
         driver.findElement(FIRST).sendKeys(FirstName);
     }
+
     public void inputLast(String LastName) {
         driver.findElement(LAST).sendKeys(LastName);
     }
+
     public void inputZip(String ZipCode) {
         driver.findElement(ZIP).sendKeys(ZipCode);
     }

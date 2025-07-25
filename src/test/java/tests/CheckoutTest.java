@@ -18,52 +18,55 @@ public class CheckoutTest extends BaseTest {
             testName = "Позитивный. Проверка кнопки корзина",
             groups = {"Checkout"})
     public void checkButtonCart(String user, String password) {
-        loginPage.open();
-        loginPage.login(user, password);
-        productsPage.open();
-        assertTrue(productsPage.isPageOpened());
+        loginPage.open()
+                .login(user, password);
+        productsPage.open()
+                .isPageOpened();
         productsPage.addProduct();
         productsPage.addProduct();
-        cartPage.open();
-        assertTrue(cartPage.isPageOpened());
+        cartPage.open()
+                .isPageOpened();
         cartPage.buttonCheckOut();
-        assertTrue(checkOutStepOnePage.isPageOpened());
+        checkOutStepOnePage.open()
+                .isPageOpened();
         checkOutStepOnePage.clickButtonCart();
-        assertTrue(cartPage.isPageOpened());
+        cartPage.isPageOpened();
     }
 
     @Test(priority = 2, dataProvider = "LoginDataForCheckout", description = "Проверка кнопки Cancel",
             testName = "Позитивный. Проверка кнопки Cancel",
             groups = {"Checkout"})
     public void checkButtonCancel(String user, String password) {
-        loginPage.open();
-        loginPage.login(user, password);
-        productsPage.open();
-        assertTrue(productsPage.isPageOpened());
+        loginPage.open()
+                .login(user, password);
+        productsPage.open()
+                .isPageOpened();
         productsPage.addProduct();
         productsPage.addProduct();
-        cartPage.open();
-        assertTrue(cartPage.isPageOpened());
+        cartPage.open()
+                .isPageOpened();
         cartPage.buttonCheckOut();
-        assertTrue(checkOutStepOnePage.isPageOpened());
+        checkOutStepOnePage.open();
+        checkOutStepOnePage.isPageOpened();
         checkOutStepOnePage.clickButtonCancel();
-        assertTrue(cartPage.isPageOpened());
+        cartPage.isPageOpened();
     }
 
     @Test(priority = 3, dataProvider = "LoginDataForCheckout", description = "Проверка формы покупки",
             testName = "Негативный. Проверка формы покупки",
             groups = {"Checkout"})
     public void checkFormNegative(String user, String password) {
-        loginPage.open();
-        loginPage.login(user, password);
-        productsPage.open();
-        assertTrue(productsPage.isPageOpened());
+        loginPage.open()
+                .login(user, password);
+        productsPage.open()
+                .isPageOpened();
         productsPage.addProduct();
         productsPage.addProduct();
-        cartPage.open();
-        assertTrue(cartPage.isPageOpened());
+        cartPage.open()
+                .isPageOpened();
         cartPage.buttonCheckOut();
-        assertTrue(checkOutStepOnePage.isPageOpened());
+        checkOutStepOnePage.open()
+                .isPageOpened();
         checkOutStepOnePage.clickButtonContinue();
         assertEquals(checkOutStepOnePage.getErrorMessage(),
                 "Error: First Name is required",
@@ -113,21 +116,22 @@ public class CheckoutTest extends BaseTest {
             testName = "Позитивный. Проверка формы покупки",
             groups = {"Checkout"})
     public void checkFormPositive(String user, String password) {
-        loginPage.open();
-        loginPage.login(user, password);
-        productsPage.open();
-        assertTrue(productsPage.isPageOpened());
+        loginPage.open()
+                .login(user, password);
+        productsPage.open()
+                .isPageOpened();
         productsPage.addProduct();
         productsPage.addProduct();
-        cartPage.open();
-        assertTrue(cartPage.isPageOpened());
+        cartPage.open()
+                .isPageOpened();
         cartPage.buttonCheckOut();
-        assertTrue(checkOutStepOnePage.isPageOpened());
+        checkOutStepOnePage.open()
+                .isPageOpened();
         checkOutStepOnePage.inputFirst("fn");
         checkOutStepOnePage.inputLast("ln");
         checkOutStepOnePage.inputZip("zip");
         checkOutStepOnePage.clickButtonContinue();
-        assertTrue(checkOutStepTwoPage.isPageOpened());
+        checkOutStepTwoPage.isPageOpened();
     }
 
     @Test(priority = 5, dataProvider = "LoginDataForCheckout", description = "Проверка формы покупки шаг 2",
@@ -137,18 +141,18 @@ public class CheckoutTest extends BaseTest {
         loginPage.open();
         loginPage.login(user, password);
         productsPage.open();
-        assertTrue(productsPage.isPageOpened());
+        productsPage.isPageOpened();
         productsPage.addProduct();
         productsPage.addProduct();
         cartPage.open();
-        assertTrue(cartPage.isPageOpened());
+        cartPage.isPageOpened();
         cartPage.buttonCheckOut();
-        assertTrue(checkOutStepOnePage.isPageOpened());
+        checkOutStepOnePage.isPageOpened();
         checkOutStepOnePage.inputFirst("fn");
         checkOutStepOnePage.inputLast("ln");
         checkOutStepOnePage.inputZip("zip");
         checkOutStepOnePage.clickButtonContinue();
-        assertTrue(checkOutStepTwoPage.isPageOpened());
+        checkOutStepTwoPage.isPageOpened();
         checkOutStepTwoPage.clickButtonCancel();
         assertEquals(checkOutStepTwoPage.isElement(),
                 0,

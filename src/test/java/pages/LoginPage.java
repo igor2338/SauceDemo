@@ -1,7 +1,11 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import static org.testng.Assert.assertEquals;
 
 public class LoginPage extends BasePage {
 
@@ -14,17 +18,43 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void open() {
+    @Step("Открытие страницы Корзина")
+    @Override
+    public LoginPage open() {
         driver.get(BASE_URL);
+        return this;
     }
 
-    public void login(String user, String password) {
+    @Step("Отображение элемента на странице Корзина")
+    @Override
+    public LoginPage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_FILED));
+        return this;
+    }
+
+    @Override
+    public BasePage isElement() {
+        return null;
+    }
+
+    @Override
+    public BasePage removeProduct() {
+        return null;
+    }
+
+    @Step("Авторизация")
+    public LoginPage login(String user, String password) {
         driver.findElement(LOGIN_FILED).sendKeys(user);
         driver.findElement(PASSWORD_FILED).sendKeys(password);//name
         driver.findElement(LOGIN_BUTTON).click();
+        return this;
     }
 
-    public String getErrorMessage() {
-        return driver.findElement(ERROR_MESSAGE).getText();
+    @Step("Получение сообщения")
+    public LoginPage getErrorMessage(String message) {
+        assertEquals(driver.findElement(ERROR_MESSAGE).getText(),
+                message,
+                "Сообщение не соответствует");
+        return this;
     }
 }

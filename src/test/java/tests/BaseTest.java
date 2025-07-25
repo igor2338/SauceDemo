@@ -4,12 +4,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import pages.*;
 
 import java.time.Duration;
 import java.util.HashMap;
+
+import static tests.AllureUtils.takeScreenshot;
+
 @Listeners(TestListener.class)
 public class BaseTest {
     WebDriver driver;
@@ -21,11 +26,11 @@ public class BaseTest {
     CheckOutStepTwoPage checkOutStepTwoPage;
 
     @Parameters({"browser"})
-    @BeforeMethod(alwaysRun = true)
-    public void setup(@Optional("chrome") String browser) {
+    @BeforeMethod(alwaysRun = true, description = "Настройка драйвера")
+    public void setup(@Optional("chrome") String browser, ITestContext iTestContext) {
         softAssert = new SoftAssert();
 
-        if (browser.equalsIgnoreCase("chrome")){
+        if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
             HashMap<String, Object> chromePrefs = new HashMap<>();
             chromePrefs.put("credentials_enable_service", false);
@@ -39,19 +44,28 @@ public class BaseTest {
         } else if (browser.equalsIgnoreCase("edge")) {
             driver = new EdgeDriver();
         }
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        iTestContext.setAttribute("driver", driver);
 
         softAssert = new SoftAssert();
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
-        cartPage = new CartPage(driver);
+        cartPage = new CartPage(driver) {
+            @Override
+            public BasePage isElement() {
+                return null;
+            }
+        };
         checkOutStepOnePage = new CheckOutStepOnePage(driver);
         checkOutStepTwoPage = new CheckOutStepTwoPage(driver);
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() {
+    @AfterMethod(alwaysRun = true, description = "Закрытие браузера")
+    public void tearDown(ITestResult result) {
+        if (ITestResult.FAILURE == result.getStatus()) {
+            takeScreenshot(driver);
+        }
         driver.quit();
     }
 }
