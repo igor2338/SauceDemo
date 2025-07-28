@@ -154,8 +154,6 @@ public class CheckoutTest extends BaseTest {
         checkOutStepOnePage.clickButtonContinue();
         checkOutStepTwoPage.isPageOpened();
         checkOutStepTwoPage.clickButtonCancel();
-        assertEquals(checkOutStepTwoPage.isElement(),
-                0,
-                "Ошибка отображения страницы");
+        checkOutStepTwoPage.isElements("0");
     }
 }

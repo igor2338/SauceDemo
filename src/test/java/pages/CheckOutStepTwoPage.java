@@ -1,12 +1,14 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.testng.Assert.assertEquals;
 
+@Log4j2
 public class CheckOutStepTwoPage extends BasePage {
 
     public final By TITLE = By.xpath("//span[text()='Checkout: Overview']");
@@ -35,12 +37,14 @@ public class CheckOutStepTwoPage extends BasePage {
         return null;
     }
 
+    @Step("Нажатие кнопки Cancel")
     public void clickButtonCancel() {
+        log.info ("Tap button Cancel");
         driver.findElement(BUTTON_CANCEL).click();
     }
 
     @Step("Поиск количество элементов на странице")
-    public CheckOutStepTwoPage isElement(String count) {
+    public CheckOutStepTwoPage isElements(String count) {
         assertEquals(driver.findElement(TITLE).getSize(),
                 count,
                 "Количество не соответствует");
