@@ -94,12 +94,12 @@ public class LocatorsTest {
         driver.findElement(By.cssSelector(".shopping_cart_badge"));//class
         driver.findElement(By.cssSelector("noscript"));//tagName
         driver.findElement(By.cssSelector("nav.bm-item-list"));//tagname.class
-        driver.findElement(By.cssSelector("nav[style='height: 100%;']"));//[attribute=value]
-        driver.findElement(By.cssSelector("nav[style~='100%;']"));//[attribute~=value]
-        //[attribute|=value]
-        driver.findElement(By.cssSelector("a[id*='logout']"));//[attribute^=value]
-        driver.findElement(By.cssSelector("div[class$='_logo']"));//[attribute$=value]
-        driver.findElement(By.cssSelector("a[id*='reset_sidebar_link']"));//[attribute*=value]
+        driver.findElement(By.cssSelector("nav[style='height: 100%;']"));//[attribute=value] [lang="it"] выбирает все элементы с атрибутом lang="it"
+        driver.findElement(By.cssSelector("nav[style~='100%;']"));//[attribute~=value] [title~="flower"] выбирает все элементы с атрибутом title, содержащим слово "flower"
+        //[attribute|=value] [lang|="en"] выбирает все элементы со значением атрибута lang, равным "en" или начинающимся с "en-"
+        driver.findElement(By.cssSelector("a[id*='logout']"));//[attribute^=value] [href^="https"] выбирает все элементы со значением атрибута href, которое начинается с "https"
+        driver.findElement(By.cssSelector("div[class$='_logo']"));//[attribute$=value] [href$=".pdf"] выбирает все элементы, значение атрибута href которых заканчивается на ".pdf"
+        driver.findElement(By.cssSelector("a[id*='reset_sidebar_link']"));//[attribute*=value] [href*="w3schools"] выбирает все элементы со значением атрибута href, содержащим подстроку «w3schools»
         //здесь 2 часть ДЗ перехожу в корзину и сравниваю товары и цены
         driver.findElement(By.className("shopping_cart_link")).click();//className
         WebElement webElement1 = driver.findElements(By.className("inventory_item_name")).get(0);
