@@ -32,11 +32,6 @@ public class CheckOutStepTwoPage extends BasePage {
         return this;
     }
 
-    @Override
-    public BasePage isElement() {
-        return null;
-    }
-
     @Step("Нажатие кнопки Cancel")
     public void clickButtonCancel() {
         log.info ("Tap button Cancel");
@@ -49,10 +44,5 @@ public class CheckOutStepTwoPage extends BasePage {
                 count,
                 "Количество не соответствует");
         return this;
-    }
-
-    @Override
-    public BasePage removeProduct() {
-        return null;
     }
 }

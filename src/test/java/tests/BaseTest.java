@@ -26,6 +26,9 @@ public class BaseTest {
     CheckOutStepOnePage checkOutStepOnePage;
     CheckOutStepTwoPage checkOutStepTwoPage;
 
+    String user = System.getProperty("user", PropertyReader.getProperty("user"));
+    String password = System.getProperty("password", PropertyReader.getProperty("password"));
+
     @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true, description = "Настройка драйвера")
     public void setup(@Optional("chrome") String browser, ITestContext iTestContext) {
@@ -55,12 +58,7 @@ public class BaseTest {
         softAssert = new SoftAssert();
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
-        cartPage = new CartPage(driver) {
-            @Override
-            public BasePage isElement() {
-                return null;
-            }
-        };
+        cartPage = new CartPage(driver);
         checkOutStepOnePage = new CheckOutStepOnePage(driver);
         checkOutStepTwoPage = new CheckOutStepTwoPage(driver);
     }

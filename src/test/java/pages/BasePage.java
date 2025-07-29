@@ -9,7 +9,7 @@ public abstract class BasePage {
 
     protected final String BASE_URL = "https://www.saucedemo.com/";
 
-    WebDriver driver;
+    static WebDriver driver;
     WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
@@ -20,8 +20,4 @@ public abstract class BasePage {
     public abstract BasePage open();
 
     public abstract BasePage isPageOpened();
-
-    public abstract BasePage isElement();
-
-   public abstract BasePage removeProduct();
 }

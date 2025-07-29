@@ -11,7 +11,7 @@ import org.testng.Assert;
 import static org.testng.Assert.assertEquals;
 
 @Log4j2
-public abstract class CartPage extends BasePage {
+public class CartPage extends BasePage {
     public final By TITLE = By.xpath("//span[text()='Your Cart']");
     public final By COUNT = By.cssSelector(".shopping_cart_badge");
     public final By REMOVE = By.xpath("//button[contains(@class,'btn btn_secondary btn_small cart_button')]");
@@ -46,7 +46,7 @@ public abstract class CartPage extends BasePage {
     }
 
     @Step("Сравнение количества элементов на странице")
-    public CartPage isElement(String count) {
+    public void isElement(String count) {
         log.info("Comparison of elements");
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE));
@@ -57,11 +57,9 @@ public abstract class CartPage extends BasePage {
             log.error(e.getMessage());
             Assert.fail("Quantity isn't correct");
         }
-        return this;
     }
 
     @Step("Удаление товара из корзины")
-    @Override
     public CartPage removeProduct() {
         log.info("Remove of element");
         driver.findElement(REMOVE).click();

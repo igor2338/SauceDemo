@@ -43,16 +43,6 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    @Override
-    public BasePage isElement() {
-        return null;
-    }
-
-    @Override
-    public BasePage removeProduct() {
-        return null;
-    }
-
     @Step("Авторизация")
     public LoginPage login(String user, String password) {
         log.info("Log in with credential: {}, {}", user, password);

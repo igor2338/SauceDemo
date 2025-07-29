@@ -31,16 +31,6 @@ public class ProductsPage extends BasePage {
         return this;
     }
 
-    @Override
-    public BasePage isElement() {
-        return null;
-    }
-
-    @Override
-    public BasePage removeProduct() {
-        return null;
-    }
-
     @Step("Добавление элемента в Корзину")
     public void addProduct() {
         log.info("Added product to Cart");

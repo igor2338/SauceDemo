@@ -38,16 +38,6 @@ public class CheckOutStepOnePage extends BasePage {
         return this;
     }
 
-    @Override
-    public BasePage isElement() {
-        return null;
-    }
-
-    @Override
-    public BasePage removeProduct() {
-        return null;
-    }
-
     @Step("Нажатие кнопки Корзина")
     public void clickButtonCart() {
         log.info("Tap button Cart");
