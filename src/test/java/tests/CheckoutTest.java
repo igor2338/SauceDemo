@@ -154,6 +154,6 @@ public class CheckoutTest extends BaseTest {
         checkOutStepOnePage.clickButtonContinue();
         checkOutStepTwoPage.isPageOpened();
         checkOutStepTwoPage.clickButtonCancel();
-        checkOutStepTwoPage.isElements("0");
+        checkOutStepTwoPage.isElements("2");
     }
 }

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 @Log4j2
 public class CartPage extends BasePage {
@@ -52,6 +53,19 @@ public class CartPage extends BasePage {
             wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE));
             assertEquals(driver.findElement(COUNT).getText(),
                     count);
+            log.info("Quantity is correct");
+        } catch (TimeoutException e) {
+            log.error(e.getMessage());
+            Assert.fail("Quantity isn't correct");
+        }
+    }
+
+    @Step("Проверка отсутствия товара в корзине")
+    public void isElements() {
+        log.info("Comparison of elements");
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE));
+            assertTrue(driver.findElements(COUNT).isEmpty());
             log.info("Quantity is correct");
         } catch (TimeoutException e) {
             log.error(e.getMessage());

@@ -38,7 +38,7 @@ public class CheckOutStepTwoPage extends BasePage {
         driver.findElement(BUTTON_CANCEL).click();
     }
 
-    @Step("Поиск количество элементов на странице")
+    @Step("Поиск количества элементов на странице")
     public CheckOutStepTwoPage isElements(String count) {
         assertEquals(driver.findElement(TITLE).getSize(),
                 count,

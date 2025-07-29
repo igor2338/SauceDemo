@@ -28,9 +28,11 @@ public class CartTest extends BaseTest {
     public void checkEmptyCart(String user, String password) {
         loginPage.open()
                 .login(user, password);
+        productsPage.open()
+                        .isPageOpened();
         cartPage.open()
                 .isPageOpened()
-                .isElement("1");
+                .isElements();
     }
 
     @Test(priority = 2, dataProvider = "LoginDataForCart", description = "Проверка добавления/наличия товара в корзине",
@@ -60,7 +62,7 @@ public class CartTest extends BaseTest {
                 .isPageOpened()
                 .removeProduct()
                 .removeProduct()
-                .isElement("0");
+                .isElements();
     }
 
     @Test(priority = 4, dataProvider = "LoginDataForCart", description = "Проверка кнопки Continue в корзине",
