@@ -2,6 +2,7 @@ package tests;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.ProductsPage;
 
 import static org.testng.Assert.*;
 
@@ -154,6 +155,6 @@ public class CheckoutTest extends BaseTest {
         checkOutStepOnePage.clickButtonContinue();
         checkOutStepTwoPage.isPageOpened();
         checkOutStepTwoPage.clickButtonCancel();
-        checkOutStepTwoPage.isElements("2");
+        productsPage.isProductsOpen("2");
     }
 }

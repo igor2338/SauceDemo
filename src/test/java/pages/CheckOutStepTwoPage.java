@@ -12,6 +12,7 @@ import static org.testng.Assert.assertEquals;
 public class CheckOutStepTwoPage extends BasePage {
 
     public final By TITLE = By.xpath("//span[text()='Checkout: Overview']");
+    public final By COUNT = By.cssSelector(".shopping_cart_badge");
     public final By BUTTON_CANCEL = By.id("cancel");
 
     public CheckOutStepTwoPage(WebDriver driver) {
@@ -34,15 +35,7 @@ public class CheckOutStepTwoPage extends BasePage {
 
     @Step("Нажатие кнопки Cancel")
     public void clickButtonCancel() {
-        log.info ("Tap button Cancel");
+        log.info("Tap button Cancel");
         driver.findElement(BUTTON_CANCEL).click();
-    }
-
-    @Step("Поиск количества элементов на странице")
-    public CheckOutStepTwoPage isElements(String count) {
-        assertEquals(driver.findElement(TITLE).getSize(),
-                count,
-                "Количество не соответствует");
-        return this;
     }
 }

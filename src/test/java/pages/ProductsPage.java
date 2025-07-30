@@ -6,9 +6,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static org.testng.Assert.assertEquals;
+
 @Log4j2
 public class ProductsPage extends BasePage {
     public final By TITLE = By.xpath("//span[text()='Products']");
+    public final By COUNT = By.cssSelector(".shopping_cart_badge");
     public final By PRODUCTS = By.xpath("//button[contains(@class,'btn btn_primary btn_small btn_inventory')]");
 
     public ProductsPage(WebDriver driver) {
@@ -35,5 +38,15 @@ public class ProductsPage extends BasePage {
     public void addProduct() {
         log.info("Added product to Cart");
         driver.findElement(PRODUCTS).click();
+    }
+
+    @Step("Отображение количества товара в корзине")
+    public ProductsPage isProductsOpen(String count) {
+        log.info("Products page is opened");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(COUNT));
+        assertEquals(driver.findElement(COUNT).getText(),
+                count,
+                "Количество не соответствует");
+        return this;
     }
 }
